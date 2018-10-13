@@ -1,0 +1,16 @@
+*~
+*.egg-info
+*.sw[opnlm]
+.node-version
+
+.DS_Store
+.coverage
+.cache
+
+node_modules
+/.profile
+.idea/
+/dist
+/.idea
+npm-debug.log
+*#

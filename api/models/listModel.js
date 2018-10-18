@@ -35,10 +35,10 @@ var ListSchema = new Schema({
   content: {
     type: String
   },
-  video_id: {
-    type: String,
+  videoId: {
+    type: String
   },
-  created_date: {
+  createdDate: {
     type: Date,
     default: Date.now
   }

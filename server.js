@@ -6,6 +6,7 @@ var express = require('express'),
   List = require('./api/models/listModel'), //created model loading here
   User = require('./api/models/userModel'),
   Category = require('./api/models/categoryModel'),
+  APP = require('./api/models/appModel'),
   bodyParser = require('body-parser');
 
 // mongoose instance connection url connection
@@ -19,12 +20,12 @@ mongoose.connect('mongodb://localhost/Appdb',function (err) {
 });
 
 
-app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(function (req, res, next) {
-  if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'JWT') {
-    jwt.verify(req.headers.authorization.split(' ')[1], 'RESTFULAPIs', function (err, decode) {
+  if (req.headers && req.headers.authorization) {
+    jwt.verify(req.headers.authorization, 'RESTFULAPIs', function (err, decode) {
       if(err) {
         req.user = undefined
       }
@@ -47,4 +48,4 @@ app.use(function(req, res) {
 app.listen(port);
 
 
-console.log('todo list RESTful API server started on: ' + port);
+console.log('API server started on: ' + port);

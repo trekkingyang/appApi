@@ -8,12 +8,12 @@ exports.register = function(req, res){
   newUser.hash_password = bcrypt.hashSync(req.body.password, 10);
   newUser.save(function(err, user) {
     if (err) {
-      return res.status(400).send({
+      return res.status(400).send({code: 1,
         message: err
       });
     } else {
       user.hash_password = undefined;
-      return res.json(user);
+      return res.json({code:0,data:user});
     }
   });
 }
@@ -23,12 +23,12 @@ exports.sign_in = function(req, res){
   }, function(err, user) {
     if (err) throw err;
     if (!user) {
-      res.status(401).json({ message: 'Authentication failed. User not found.' });
+      res.status(200).json({code:20003,  message: 'Authentication failed. User not found.' });
     } else if (user) {
       if (!user.comparePassword(req.body.password)) {
-        res.status(401).json({ message: 'Authentication failed. Wrong password.' });
+        res.status(200).json({code:20003,  message: 'Authentication failed. Wrong password.' });
       } else {
-        return res.json({token: jwt.sign({ email: user.email, fullName: user.fullName, _id: user._id}, 'RESTFULAPIs')});
+        return res.json({code:0,data: jwt.sign({ email: user.email, fullName: user.fullName, _id: user._id})});
       }
     }
   });
@@ -37,6 +37,6 @@ exports.loginRequired = function(req, res, next){
   if (req.user) {
     next();
   } else {
-    return res.status(401).json({ message: 'Unauthorized user!' });
+    return res.status(200).json({code:20003, message: 'Unauthorized user!' });
   }
 }

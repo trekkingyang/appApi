@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 
 
 var UserSchema = new Schema({
-  fullname: {
+  name: {
     type: String,
     trim: true,
     required: true
@@ -17,13 +17,13 @@ var UserSchema = new Schema({
     trim: true,
     required: true
   },
-  hash_password: {
+  password: {
     type: String,
     required: true
   },
-  status: {
+  createdDate: {
     type: Date,
-    default: Date.now()
+    default: Date.now
   }
 });
 UserSchema.methods.comparePassword = function (password) {

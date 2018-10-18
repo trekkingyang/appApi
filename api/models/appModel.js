@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 
-var CategorySchema = new Schema({
+var appSchema = new Schema({
   chineseName: {
     type: String,
     required: true
@@ -16,13 +16,9 @@ var CategorySchema = new Schema({
     type: String,
     required: true
   },
-  appName: {
-    type: String,
-    required: true
-  },
-  createdDate: {
+  createDate: {
     type: Date,
-    default: Date.now
+    default: Date.now()
   }
 });
-module.exports = mongoose.model('Category', CategorySchema);
+module.exports = mongoose.model('APP', appSchema);

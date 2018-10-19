@@ -33,7 +33,7 @@ var ListSchema = new Schema({
     required: true
   },
   content: {
-    type: String
+    type: String,
   },
   videoId: {
     type: String

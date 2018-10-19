@@ -20,7 +20,8 @@ module.exports = function(app) {
   //获取详情
   app.route('/detail')
     .get(userHandlers.loginRequired,list.read_item)
-    .post(userHandlers.loginRequired, list.update_item)
+    .post(userHandlers.loginRequired, list.create_item)
+    .put(userHandlers.loginRequired, list.update_item)
     .delete(userHandlers.loginRequired, list.delete_item);
   //所有的分类
   app.route('/category')
@@ -31,7 +32,7 @@ module.exports = function(app) {
   app.route('/auth/register')
     .post(userHandlers.register);
   
-  app.route('/auth/sign_in')
+  app.route('/auth/sign')
     .post(userHandlers.sign_in);
   app.route('/file/upload')
     .post(uploadFile.single('avatar'),upload.upload_file);

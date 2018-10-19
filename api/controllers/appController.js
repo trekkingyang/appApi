@@ -10,7 +10,6 @@ exports.list_all = function (req, res) {
 }
 
 exports.create_item = function(req, res) {
-  console.log(req.body);
   var new_item = new appData(req.body);
   new_item.save(function(err, data) {
     if (err)
